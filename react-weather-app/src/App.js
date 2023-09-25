@@ -124,8 +124,8 @@ function App() {
       <footer className="footer">
         <code>
           Created by{' '}
-          <a href="https://github.com/imshines" target="none">
-            imshines
+          <a href="https://github.com/kaluawa22" target="none">
+            Kalu
           </a>{' '}
           using React
         </code>
