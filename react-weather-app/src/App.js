@@ -9,8 +9,8 @@ function App() {
   // State
 
   const [apiData, setApiData] = useState({});
-  const [getState, setGetState] = useState('tamilnadu');
-  const [state, setState] = useState('tamilnadu');
+  const [getState, setGetState] = useState('Houston');
+  const [state, setState] = useState('Houston');
 
   
   const apiKey = process.env.REACT_APP_API_KEY;
