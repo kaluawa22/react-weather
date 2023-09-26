@@ -1,48 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
-<<<<<<< Updated upstream
 import { useState, useEffect } from 'react';
-
+import Dashboard from "./components/Dashboard";
 function App() {
 
 
 
   // State
-=======
-import React, { useState } from 'react';
-import React, { useEffect } from 'react';
-
-
-
-
-
-
-
-function App() {
-
-  const apiKey = process.env.REACT_APP_API_KEY;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
->>>>>>> Stashed changes
 
   const [apiData, setApiData] = useState({});
   const [getState, setGetState] = useState('tamilnadu');
   const [state, setState] = useState('tamilnadu');
 
-<<<<<<< Updated upstream
   
   const apiKey = process.env.REACT_APP_API_KEY;
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
   // Side Effect
 
-=======
->>>>>>> Stashed changes
   useEffect( () => {
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => setApiData(data));
   }, [apiUrl]);
 
-<<<<<<< Updated upstream
   // Handle Input
 
   const inputHandler = (event) => {
@@ -57,8 +37,6 @@ function App() {
     return (k - 273.15).toFixed(2);
   };
 
-=======
->>>>>>> Stashed changes
 
 
 
@@ -68,6 +46,8 @@ function App() {
       <header className="d-flex justify-content-center align-items-center">
         <h2>React Weather App</h2>
       </header>
+      {/* Weather Dashboard Component */}
+      <Dashboard />
       <div className="container">
         <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
           <div class="col-auto">
