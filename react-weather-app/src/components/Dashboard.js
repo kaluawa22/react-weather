@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 
 
-const Dashboard = () =>{
+const Dashboard = (props) =>{
 
 
 
@@ -10,20 +10,41 @@ const Dashboard = () =>{
         <div className='weather-dashboard'>
             <div className="padding">
                 <div className="row container d-flex justify-content-center">
+                    <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
+                        <div class="col-auto">
+                            <label for="location-name" class="col-form-label">
+                            Enter Location :
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input
+                            type="text"
+                            id="location-name"
+                            class="form-control"
+                            onChange={props.inputHandler}
+                            value={props.getState}
+                            />
+                        </div>
+                        <button className="btn btn-primary mt-2" onClick={props.submitHandler}>
+                            Search
+                        </button>
+                    </div>
                     <div className="col-lg-8 grid-margin stretch-card">
+
+                        {props.apiData.main ? (
                         <div className="card card-weather">
                             <div className="card-body">
                                 <div className="weather-date-location">
                                     <h3>Friday</h3>
                                     <p className="text-gray">
-                                    <span className="weather-date">25 March, 2019</span>
-                                    <span className="weather-location">Sydney, Australia</span>
+                                    <span className="weather-date">{props.currentDate}</span>
+                                    <span className="weather-location"><strong>{props.apiData.name}</strong></span>
                                     </p>
                                 </div>
                                 <div className="weather-data d-flex">
                                     <div className="mr-auto">
-                                    <h4 className="display-3">32
-                                        <span className="symbol">&deg;</span>C</h4>
+                                    <h4 className="display-3">{props.kelvinToF(props.apiData.main.temp)}
+                                        <span className="symbol">&deg;</span>F</h4>
                                     <p>
                                         Cloudy
                                     </p>
@@ -98,6 +119,19 @@ const Dashboard = () =>{
                             </div>
                             </div>
                         </div>
+
+                            
+                            
+                            
+                            
+                            ) : (
+
+                                <h1>Loading</h1>
+                            
+                            
+                            
+                            
+                            )}
                     </div>
                 </div>
             </div>
