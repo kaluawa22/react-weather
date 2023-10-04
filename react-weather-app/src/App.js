@@ -14,32 +14,90 @@ function App() {
   const [apiData, setApiData] = useState({});
   const [getState, setGetState] = useState('');
   const [state, setState] = useState('');
-  const [locationData, setLocationData] = useState({});
+  // const [locationData, setLocationData] = useState({});
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [forecastData, setForecastData] = useState({});
 
   // API KEY and URL where state holds location name
   const apiKey = process.env.REACT_APP_API_KEY;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
+  const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${state}`;
+  // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
   const geoApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${state}&limit=1&appid=${apiKey}`;
+  const forecastApi = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  
   // https://api.openweathermap.org/data/2.5/weather?q=houston&appid=f1ea44311307a2d37ecf91f277cce87a
   // https://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=f1ea44311307a2d37ecf91f277cce87a
   
 
   // function to get location
 
-  const handleLocation = () =>{
-    fetch(geoApiUrl)
-      .then((res) => res.json())
-      .then((data) => setLocationData(data));
-  }
+  // const handleLocation = () =>{
+  //   fetch(geoApiUrl)
+  //     .then((res) => res.json())
+  //     .then((data) => setLocationData(data));
+  // }
+
+  
+
+
+
+
+
+
+
+
+
+  useEffect( () =>{
+    // Function to fetch lon and lat
+    const fetchCoordinates = async () => {
+      try{
+        const locationResponse = await fetch(geoApiUrl);
+        const locationData = await locationResponse.json();
+        if (locationData.length > 0) {
+          const {lat, lon} = locationData[0];
+          setLatitude(lat);
+          setLongitude(lon);
+        }
+      } catch (error){
+        console.error('Error fetching coordinates', error);
+      }
+    };
+
+    // Function to fetch 7 day forcaste
+    const fetchForecastData = async () =>{
+      if (latitude && longitude){
+        try{
+          const forcastResponse = await fetch(forecastApi);
+          const forecastData = await forcastResponse.json();
+          setForecastData(forecastData);
+          console.log(forecastData);
+        } catch (error) {
+          console.error('Error fetching forecast data:', error);
+        }
+      }
+    };
+
+    if (state){
+      fetchCoordinates();
+    }
+    
+    if(latitude && longitude){
+      fetchForecastData();
+    }
+
+
+  }, [state, latitude, longitude]);
+
 
 
   // Side Effect to call API on app load
 
-  useEffect( () => {
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((data) => setApiData(data));
-  }, [apiUrl]);
+  // useEffect( () => {
+  //   fetch(apiUrl)
+  //     .then((res) => res.json())
+  //     .then((data) => setApiData(data));
+  // }, [apiUrl]);
 
   // Handle Input
 
@@ -49,12 +107,12 @@ function App() {
 
   const submitHandler = () => {
     setState(getState);
-    // console.log(geoApiUrl);
-    fetch(geoApiUrl)
-      .then((res) => res.json())
-      .then((data) => setLocationData(data[0]));
-      // .then((data) => console.log(JSON.stringify(data)));
-    
+  //   console.log(geoApiUrl);
+  //   fetch(geoApiUrl)
+  //     .then((res) => res.json())
+  //     .then((data) => setLocationData(data[0]));
+  //     // .then((data) => console.log(JSON.stringify(data)));
+  //   console.log(locationData);
   };
 
 // To convert Kelvin to F
@@ -67,27 +125,28 @@ function App() {
   const currentDate = new Date().toLocaleString;
   console.log(currentDate);
 
-  const currentYear = () => {
-    currentDate = new Date()
-    return currentDate.getFullYear().toLocaleDateString;
-  }
+  // const currentYear = () => {
+  //   currentDate = new Date()
+  //   return currentDate.getFullYear().toLocaleDateString;
+  // }
 
 
   return (
     <div className="App">
       <header className="d-flex justify-content-center align-items-center">
         <h2>React Weather App</h2>
-        <h2>{locationData.lat}</h2>
+        {/* <h2>{locationData.lat}</h2> */}
       </header>
       {/* Weather Dashboard Component */}
       <Dashboard
-        apiData = {apiData}
+        forecastData = {forecastData}
+        // apiData = {apiData}
         getState = {getState}
         inputHandler ={inputHandler}
         submitHandler = {submitHandler}
         kelvinToF = {kelvinToF}
-        currentDate = {currentDate}
-        locationData = {locationData}
+        // currentDate = {currentDate}
+        // locationData = {locationData}
         
       />
       <div className="container">
