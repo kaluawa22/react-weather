@@ -49,7 +49,7 @@ function App() {
 
   const submitHandler = () => {
     setState(getState);
-    // console.log(geoApiUrl);
+    console.log(geoApiUrl);
     fetch(geoApiUrl)
       .then((res) => res.json())
       .then((data) => setLocationData(data[0]));
@@ -77,7 +77,7 @@ function App() {
     <div className="App">
       <header className="d-flex justify-content-center align-items-center">
         <h2>React Weather App</h2>
-        <h2>{locationData.lat}</h2>
+        {/* <h2>{locationData.lat}</h2> */}
       </header>
       {/* Weather Dashboard Component */}
       <Dashboard
