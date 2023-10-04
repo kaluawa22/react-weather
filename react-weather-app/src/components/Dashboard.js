@@ -31,19 +31,19 @@ const Dashboard = (props) =>{
                     </div>
                     <div className="col-lg-8 grid-margin stretch-card">
 
-                        {props.apiData.main ? (
+                        {props.forecastData.main ? (
                         <div className="card card-weather">
                             <div className="card-body">
                                 <div className="weather-date-location">
                                     <h3>Friday</h3>
                                     <p className="text-gray">
                                     <span className="weather-date">{props.currentDate}</span>
-                                    <span className="weather-location"><strong>{props.apiData.name}</strong></span>
+                                    <span className="weather-location"><strong>{props.forecastData.name}</strong></span>
                                     </p>
                                 </div>
                                 <div className="weather-data d-flex">
                                     <div className="mr-auto">
-                                    <h4 className="display-3">{props.kelvinToF(props.apiData.main.temp)}
+                                    <h4 className="display-3">{props.kelvinToF(props.forecastData.name)}
                                         <span className="symbol">&deg;</span>F</h4>
                                     <p>
                                         Cloudy
