@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 import Dashboard from "./components/Dashboard";
-
+import ForecastList from "./components/ForecastList";
 
 
 
@@ -50,9 +50,9 @@ function App() {
         fetch(forecastApi)
         .then((res) => res.json())
         // .then((res) => console.log(res.json()))
-        .then((data) => console.log(data))
+        // .then((data) => console.log(data))
         .then((data) => setForecastData(data));
-       
+        console.log(forecastData.list[0]);
         
       } catch(error){
         console.error('Error fetching Forecasat', error);
@@ -128,7 +128,7 @@ function App() {
 
   const submitHandler = () => {
     setState(getState);
-    console.log(geoApiUrl);
+    console.log(forecastApi);
     // fetch(geoApiUrl)
     //   .then((res) => res.json())
     //   .then((data) => setLocationData(data[0]));
@@ -149,8 +149,8 @@ function App() {
 
 // to get local Date
 
-  const currentDate = new Date().toLocaleString;
-  console.log(currentDate);
+  // const currentDate = new Date().toLocaleString;
+  // console.log(currentDate);
 
   // const currentYear = () => {
   //   currentDate = new Date()
@@ -176,6 +176,23 @@ function App() {
         // locationData = {locationData}
         
       />
+      
+      {/* {forecastData !== undefined ? (
+        // Render your component when myState is not undefined
+        <ForecastList 
+          forecastData={forecastData} 
+        />
+      ) : (
+        // Optionally, render a fallback component or message when myState is undefined
+        <p>forecastData is undefined</p>
+      )} */}
+
+      
+      <ForecastList
+        forecastData = {forecastData}
+        kelvinToF = {kelvinToF}
+      />
+
       <div className="container">
         {/* <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
           <div class="col-auto">

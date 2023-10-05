@@ -30,18 +30,6 @@ const Dashboard = (props) =>{
                         </button>
                     </div>
                     <div className="col-lg-8 grid-margin stretch-card">
-
-
-                        <ul>
-                            {props.forecastData.list?.map((item, index) => (
-                            <li key={index}>
-                                <p>Date and Time: {item.dt_txt}</p>
-                                <p>Temperature: {item.main.temp}°C</p>
-                                <p>Humidity: {item.main.humidity}%</p>
-                                <p>Weather: {item.weather[0].description}</p>
-                            </li>
-                            ))}
-                        </ul>
                       
                         {props.forecastData? (
                         <div className="card card-weather">
