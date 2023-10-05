@@ -9,6 +9,7 @@ const ForecastList = (props) =>{
     return (
     <div>
         <h2>Weather Forecast List</h2>
+        <h2>City Name:{props.forecastData.city.name}</h2>
         {props.forecastData.list ? (
             // <p>{forecastData.list[0].main.temp}</p>
             <ul>
@@ -18,8 +19,9 @@ const ForecastList = (props) =>{
                 <p>Temperature: {props.kelvinToF(item.main.temp)}°F</p>
                 <p>Humidity: {item.main.humidity}%</p>
                 <p>Weather: {item.weather[0].description}</p>
+                <p>Sea Level: {item.main.sea_level}</p>
             </li>
-            ))}
+            )) }
         </ul>
           ) : (
             <h1>Loading</h1>
