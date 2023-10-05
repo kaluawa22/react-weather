@@ -38,12 +38,12 @@ const Dashboard = (props) =>{
                                     <h3>Friday</h3>
                                     <p className="text-gray">
                                     <span className="weather-date"></span>
-                                    <span className="weather-location"><strong>{props.forecastData.name}</strong></span>
+                                    <span className="weather-location"><strong>{' '}</strong></span>
                                     </p>
                                 </div>
                                 <div className="weather-data d-flex">
                                     <div className="mr-auto">
-                                    <h4 className="display-3">{props.forecastData.name}
+                                    <h4 className="display-3">{' '}
                                         <span className="symbol">&deg;</span>F</h4>
                                     <p>
                                         Cloudy
