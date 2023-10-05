@@ -31,19 +31,31 @@ const Dashboard = (props) =>{
                     </div>
                     <div className="col-lg-8 grid-margin stretch-card">
 
-                        {props.forecastData.main ? (
+
+                        <ul>
+                            {props.forecastData.list?.map((item, index) => (
+                            <li key={index}>
+                                <p>Date and Time: {item.dt_txt}</p>
+                                <p>Temperature: {item.main.temp}°C</p>
+                                <p>Humidity: {item.main.humidity}%</p>
+                                <p>Weather: {item.weather[0].description}</p>
+                            </li>
+                            ))}
+                        </ul>
+                      
+                        {props.forecastData? (
                         <div className="card card-weather">
                             <div className="card-body">
                                 <div className="weather-date-location">
                                     <h3>Friday</h3>
                                     <p className="text-gray">
-                                    <span className="weather-date">{props.currentDate}</span>
+                                    <span className="weather-date"></span>
                                     <span className="weather-location"><strong>{props.forecastData.name}</strong></span>
                                     </p>
                                 </div>
                                 <div className="weather-data d-flex">
                                     <div className="mr-auto">
-                                    <h4 className="display-3">{props.kelvinToF(props.forecastData.name)}
+                                    <h4 className="display-3">{props.forecastData.name}
                                         <span className="symbol">&deg;</span>F</h4>
                                     <p>
                                         Cloudy

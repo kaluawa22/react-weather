@@ -24,7 +24,8 @@ function App() {
   const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${state}`;
   // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
   const geoApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${state}&limit=1&appid=${apiKey}`;
-  const forecastApi = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  // const forecastApi = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${state}&appid=${apiKey}`;
   
   // https://api.openweathermap.org/data/2.5/weather?q=houston&appid=f1ea44311307a2d37ecf91f277cce87a
   // https://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=f1ea44311307a2d37ecf91f277cce87a
@@ -42,52 +43,72 @@ function App() {
 
 
 
+  useEffect( () => {
 
-
-
-
-
-
-  useEffect( () =>{
-    // Function to fetch lon and lat
-    const fetchCoordinates = async () => {
+    const fetchForecastData = () =>{
       try{
-        const locationResponse = await fetch(geoApiUrl);
-        const locationData = await locationResponse.json();
-        if (locationData.length > 0) {
-          const {lat, lon} = locationData[0];
-          setLatitude(lat);
-          setLongitude(lon);
-        }
-      } catch (error){
-        console.error('Error fetching coordinates', error);
+        fetch(forecastApi)
+        .then((res) => res.json())
+        // .then((res) => console.log(res.json()))
+        .then((data) => console.log(data))
+        .then((data) => setForecastData(data));
+       
+        
+      } catch(error){
+        console.error('Error fetching Forecasat', error);
       }
-    };
-
-    // Function to fetch 7 day forcaste
-    const fetchForecastData = async () =>{
-      if (latitude && longitude){
-        try{
-          const forcastResponse = await fetch(forecastApi);
-          const forecastData = await forcastResponse.json();
-          setForecastData(forecastData);
-          console.log(forecastData);
-        } catch (error) {
-          console.error('Error fetching forecast data:', error);
-        }
-      }
-    };
+    }
 
     if (state){
-      fetchCoordinates();
-    }
-    
-    if(latitude && longitude){
       fetchForecastData();
     }
 
+  }, [state]);
 
-  }, [state, latitude, longitude]);
+
+
+
+
+  // useEffect( () =>{
+  //   // Function to fetch lon and lat
+  //   const fetchCoordinates = async () => {
+  //     try{
+  //       const locationResponse = await fetch(geoApiUrl);
+  //       const locationData = await locationResponse.json();
+  //       if (locationData.length > 0) {
+  //         const {lat, lon} = locationData[0];
+  //         setLatitude(lat);
+  //         setLongitude(lon);
+  //       }
+  //     } catch (error){
+  //       console.error('Error fetching coordinates', error);
+  //     }
+  //   };
+
+  //   // Function to fetch 7 day forcaste
+  //   const fetchForecastData = async () =>{
+  //     if (latitude && longitude){
+  //       try{
+  //         const forcastResponse = await fetch(forecastApi);
+  //         const forecastData = await forcastResponse.json();
+  //         setForecastData(forecastData);
+  //         console.log(forecastData);
+  //       } catch (error) {
+  //         console.error('Error fetching forecast data:', error);
+  //       }
+  //     }
+  //   };
+
+  //   if (state){
+  //     fetchCoordinates();
+  //   }
+    
+  //   if(latitude && longitude){
+  //     fetchForecastData();
+  //   }
+
+
+  // }, [state, latitude, longitude]);
 
 
 
@@ -108,9 +129,9 @@ function App() {
   const submitHandler = () => {
     setState(getState);
     console.log(geoApiUrl);
-    fetch(geoApiUrl)
-      .then((res) => res.json())
-      .then((data) => setLocationData(data[0]));
+    // fetch(geoApiUrl)
+    //   .then((res) => res.json())
+    //   .then((data) => setLocationData(data[0]));
       // .then((data) => console.log(JSON.stringify(data)));
     
   //   console.log(geoApiUrl);
