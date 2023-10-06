@@ -10,6 +10,7 @@ const ForecastList = (props) =>{
     <div>
         <h2>Weather Forecast List</h2>
         
+       
         {props.forecastData.list ? (
             
             // <p>{forecastData.list[0].main.temp}</p>
