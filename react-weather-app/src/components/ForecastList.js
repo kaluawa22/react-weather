@@ -9,8 +9,9 @@ const ForecastList = (props) =>{
     return (
     <div>
         <h2>Weather Forecast List</h2>
-        <h2>City Name:{props.forecastData.city.name}</h2>
+        
         {props.forecastData.list ? (
+            
             // <p>{forecastData.list[0].main.temp}</p>
             <ul>
             {props.forecastData.list.map((item, index) => (

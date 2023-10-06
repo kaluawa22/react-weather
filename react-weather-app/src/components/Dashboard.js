@@ -71,6 +71,7 @@ const Dashboard = (props) =>{
                                         31&deg;
                                     </p>
                                     </div>
+                                    
                                     <div className="weakly-weather-item">
                                     <p className="mb-1">
                                         Tue

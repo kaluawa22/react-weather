@@ -3,7 +3,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Dashboard from "./components/Dashboard";
 import ForecastList from "./components/ForecastList";
-
+import WeatherDash from './components/WeatherDash';
 
 
 
@@ -161,7 +161,7 @@ function App() {
   return (
     <div className="App">
       <header className="d-flex justify-content-center align-items-center">
-        <h2>React Weather App</h2>
+      
         {/* <h2>{locationData.lat}</h2> */}
       </header>
       {/* Weather Dashboard Component */}
@@ -176,6 +176,7 @@ function App() {
         // locationData = {locationData}
         
       />
+      <WeatherDash />
       
       {/* {forecastData !== undefined ? (
         // Render your component when myState is not undefined
@@ -188,10 +189,10 @@ function App() {
       )} */}
 
       
-      <ForecastList
+      {/* <ForecastList
         forecastData = {forecastData}
         kelvinToF = {kelvinToF}
-      />
+      /> */}
 
       <div className="container">
         {/* <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
