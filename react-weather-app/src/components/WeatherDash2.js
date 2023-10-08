@@ -2,9 +2,6 @@ import React from 'react'
 import { useState } from "react";
 
 
-
-
-
 const WeatherDash = (props) => {
     return (
       <div className="container-fluid px-1 px-sm-3 py-5 mx-auto">

@@ -18,6 +18,9 @@ function App() {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [forecastData, setForecastData] = useState({});
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+
 
   // API KEY and URL where state holds location name
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -39,7 +42,7 @@ function App() {
   //     .then((data) => setLocationData(data));
   // }
 
-  
+
 
 
 
@@ -52,7 +55,7 @@ function App() {
         // .then((res) => console.log(res.json()))
         // .then((data) => console.log(data))
         .then((data) => setForecastData(data));
-        console.log(forecastData.list[0]);
+        console.log(forecastData);
         
       } catch(error){
         console.error('Error fetching Forecasat', error);
@@ -145,7 +148,7 @@ function App() {
 // To convert Kelvin to F
   const kelvinToF = (k) =>{
     return ((k - 273.15) * (9/5) + 32).toFixed(0);
-  }
+  };
 
 // to get local Date
 
@@ -165,7 +168,7 @@ function App() {
         {/* <h2>{locationData.lat}</h2> */}
       </header>
       {/* Weather Dashboard Component */}
-      <Dashboard
+      {/* <Dashboard
         forecastData = {forecastData}
         // apiData = {apiData}
         getState = {getState}
@@ -175,8 +178,15 @@ function App() {
         // currentDate = {currentDate}
         // locationData = {locationData}
         
+      /> */}
+      <WeatherDash 
+        forecastData = {forecastData}
+        inputHandler = {inputHandler}
+        getState = {getState}
+        submitHandler = {submitHandler}
+        kelvinToF = {kelvinToF}
+      
       />
-      <WeatherDash />
       
       {/* {forecastData !== undefined ? (
         // Render your component when myState is not undefined
@@ -189,10 +199,10 @@ function App() {
       )} */}
 
       
-      {/* <ForecastList
+      <ForecastList
         forecastData = {forecastData}
         kelvinToF = {kelvinToF}
-      /> */}
+      />
 
       <div className="container">
         {/* <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
