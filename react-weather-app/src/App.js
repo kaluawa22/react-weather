@@ -19,6 +19,7 @@ function App() {
   const [longitude, setLongitude] = useState('');
   const [forecastData, setForecastData] = useState({});
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [items, setItems] = useState([]);
 
 
 
@@ -42,8 +43,15 @@ function App() {
   //     .then((data) => setLocationData(data));
   // }
 
+// useEffect( () =>{
+//   const getDate = setInterval(() => {
+//     setCurrentDateTime(new Date());
+//   });
+// }, []);
 
-
+  useEffect( () => {
+    setCurrentDateTime(new Date());
+  }, []);
 
 
   useEffect( () => {
@@ -124,13 +132,23 @@ function App() {
   // }, [apiUrl]);
 
   // Handle Input
+  const addItem = () => {
+    if (getState.trim() !== '') {
+      setItems([...items, getState]);
+    }
+  };
 
   const inputHandler = (event) => {
     setGetState(event.target.value);
    };
+  
+  const itemSubmitHandler = () =>{
+    setState(items);
+  };
 
   const submitHandler = () => {
     setState(getState);
+    addItem();
     console.log(forecastApi);
     // fetch(geoApiUrl)
     //   .then((res) => res.json())
@@ -179,12 +197,16 @@ function App() {
         // locationData = {locationData}
         
       /> */}
+      
       <WeatherDash 
         forecastData = {forecastData}
         inputHandler = {inputHandler}
         getState = {getState}
         submitHandler = {submitHandler}
         kelvinToF = {kelvinToF}
+        currentDateTime = {currentDateTime}
+        items = {items}
+        itemSubmitHandler = {itemSubmitHandler}
       
       />
       
