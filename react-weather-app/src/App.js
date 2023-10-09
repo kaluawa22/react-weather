@@ -303,7 +303,7 @@ function App() {
       </div> 
       <footer className="footer">
         <code>
-          Created by{' '}
+          Created by this{' '}
           <a href="https://github.com/kaluawa22" target="none">
             Kalu
           </a>{' '}
