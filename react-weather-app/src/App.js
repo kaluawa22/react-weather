@@ -324,7 +324,7 @@ function App() {
         daysForecast = {daysForecast}
         convertDate = {convertDate}
       />
-      <WeatherDash 
+      {/* <WeatherDash 
         forecastData = {forecastData}
         inputHandler = {inputHandler}
         getState = {getState}
@@ -335,7 +335,7 @@ function App() {
         itemSubmitHandler = {itemSubmitHandler}
       
       />
-      
+       */}
       {/* {forecastData !== undefined ? (
         // Render your component when myState is not undefined
         <ForecastList 
@@ -347,10 +347,10 @@ function App() {
       )} */}
 
       
-      <ForecastList
+      {/* <ForecastList
         forecastData = {forecastData}
         kelvinToF = {kelvinToF}
-      />
+      /> */}
 
       <div className="container">
         {/* <div className="mt-3 d-flex flex-column justify-content-center align-items-center">
