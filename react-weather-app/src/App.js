@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Dashboard from "./components/Dashboard";
 import ForecastList from "./components/ForecastList";
 import WeatherDash from './components/WeatherDash';
+import MDBDashboard from "./components/MDBDashboard";
+import { MDBListGroupItem } from 'mdb-react-ui-kit';
 
 
 
@@ -20,6 +22,7 @@ function App() {
   const [forecastData, setForecastData] = useState({});
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [items, setItems] = useState([]);
+  const [daysForecast, setDaysForecast] = useState({});
 
 
 
@@ -54,10 +57,99 @@ function App() {
   }, []);
 
 
+  // useEffect( () =>{
+
+  //   try {
+  //     fetch(forecastApi)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       const groupedData = data.list.reduce((days, row) => {
+  //         const date = row.dt_txt.split(' ')[0];
+  //         days[date] = [...(days[date] ? days[date]: []), row];
+  //         return days;
+  //       }, {});
+        
+  //       for(let date of Object.keys(groupedData)){
+  //         console.log('Date:', date); 
+  //         // current date -> date
+  //         // original items array for this date -> groupedData[date]
+  //         console.log('RowCount:', groupedData[date].length);
+  //         console.log('MaxTemp:', getMax(groupedData[date], 'temp_max'));
+  //         console.log('MinTemp:', getMin(groupedData[date], 'temp_min'));
+  //         console.log('MaxHumidity:', getMax(groupedData[date], 'humidity'));
+          
+  //         console.log('\n\n');
+  //       }
+  //     });
+
+  //   } catch(error){
+  //     console.error('Error fetching Forecasat', error);
+  //   }
+    
+    
+
+  //   function getMax(arr, attr){
+  //     return Math.max.apply(Math, arr.map(item => item.main[attr]));
+  //   }
+
+  //   function getMin(arr, attr){
+  //     return Math.min.apply(Math, arr.map(item => item.main[attr]));
+  //   }
+
+  // }, [state]);
+
+
+
   useEffect( () => {
 
     const fetchForecastData = () =>{
       try{
+        fetch(forecastApi)
+        .then(res => res.json())
+        .then(data => {
+          const groupedData = data.list.reduce((days, row) => {
+            const date = row.dt_txt.split(' ')[0];
+            days[date] = [...(days[date] ? days[date]: []), row];
+            return days;
+          }, {});
+          setDaysForecast(groupedData);
+          console.log('Grouped Data:', groupedData);
+          for(let date of Object.keys(groupedData)){
+            console.log('Date:', date); 
+            // current date -> date
+            // original items array for this date -> groupedData[date]
+            console.log('RowCount:', groupedData[date].length);
+            console.log('MaxTemp:', getMax(groupedData[date], 'temp_max'));
+            console.log('MinTemp:', getMin(groupedData[date], 'temp_min'));
+            console.log('MaxHumidity:', getMax(groupedData[date], 'humidity'));
+            
+            console.log('\n\n');
+          }
+        });
+      } catch(error){
+        console.error('Error fetching Forecasat', error);
+      }
+    }
+    function getMax(arr, attr){
+      return Math.max.apply(Math, arr.map(item => item.main[attr]));
+    }
+
+    function getMin(arr, attr){
+      return Math.min.apply(Math, arr.map(item => item.main[attr]));
+    }
+    if (state){
+      fetchForecastData();
+    }
+
+  }, [state]);
+
+
+
+  useEffect( () => {
+
+    const fetchForecastData = () =>{
+      try{
+        console.log(forecastApi);
         fetch(forecastApi)
         .then((res) => res.json())
         // .then((res) => console.log(res.json()))
@@ -178,6 +270,29 @@ function App() {
   //   return currentDate.getFullYear().toLocaleDateString;
   // }
 
+  // const formatDate = (inputDate) =>{
+  //   console.log(inputDate);
+  //   const date = new Date(inputDate);
+  //   const formmatedDate = date.toLocaleDateString('en-US', {
+  //     year: 'numeric',
+  //     month: '2-digit',
+  //     day: '2-digit',
+  //   });
+  //   console.log("formmated date", formmatedDate);
+  //   return formmatedDate
+  // }
+
+  const convertDate = (myDate) =>{
+    const parts = myDate.split('-');
+    const formmatedDate = `${parts[1]}-${parts[2]}-${parts[0]}`;
+
+    // console.log(dateString);
+    const date = new Date(formmatedDate);
+    const options = {weekday: 'long'};
+    const weekday = date.toLocaleDateString('en-US', options);
+    return weekday;
+
+  }
 
   return (
     <div className="App">
@@ -197,7 +312,18 @@ function App() {
         // locationData = {locationData}
         
       /> */}
-      
+      <MDBDashboard 
+        forecastData = {forecastData}
+        inputHandler = {inputHandler}
+        getState = {getState}
+        submitHandler = {submitHandler}
+        kelvinToF = {kelvinToF}
+        currentDateTime = {currentDateTime}
+        items = {items}
+        itemSubmitHandler = {itemSubmitHandler}
+        daysForecast = {daysForecast}
+        convertDate = {convertDate}
+      />
       <WeatherDash 
         forecastData = {forecastData}
         inputHandler = {inputHandler}
