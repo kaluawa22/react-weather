@@ -32,14 +32,7 @@ export default function Card(props) {
                 onChange={props.inputHandler}
                 value={props.getState}
                 />
-                <a href="#!" type="button">
-                <span
-                    className="input-group-text border-0 fw-bold"
-                    id="search-addon"
-                >
-                    Check!
-                </span>
-                </a>
+                
                 <button className="btn btn-primary mt-2" onClick={props.submitHandler}>
                     Search
                 </button>
@@ -127,14 +120,7 @@ export default function Card(props) {
                 onChange={props.inputHandler}
                 value={props.getState}
             />
-            <a href="#!" type="button">
-            <span
-                className="input-group-text border-0 fw-bold"
-                id="search-addon"
-            >
-                Check!
-            </span>
-            </a>
+            
             <button className="btn btn-primary mt-2" onClick={props.submitHandler}>
                 Search
             </button>
