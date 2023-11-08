@@ -25,12 +25,12 @@ export default function Card(props) {
         
         
         {props.forecastData.list ? (
-            <MDBContainer className="h-100">
+            <MDBContainer className="h-70">
             <MDBInputGroup className="mb-3">
                 <input
                 type="text"
                 id="location-name"
-                placeholder="Location"
+                placeholder="Enter A City Name"
                 name="location"
                 className="rounded"
                 onChange={props.inputHandler}
@@ -113,12 +113,12 @@ export default function Card(props) {
 
         ) : (
 
-            <MDBContainer className="h-100">
+            <MDBContainer className="h-50">
               <MDBInputGroup className="mb-3">
                   <input
                       type="text"
                       id="location-name"
-                      placeholder="Location"
+                      placeholder="Enter A City Name"
                       name="location"
                       className="rounded"
                       onChange={props.inputHandler}
@@ -148,10 +148,10 @@ export default function Card(props) {
                           <p className="text-muted mb-0">Enter A City Name</p>
                         </div>
                         <div>
-                          <img
+                          {/* <img
                             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp"
                             width="150px"
-                          />
+                          /> */}
                         </div>
                       </div>
                     </MDBCardBody>

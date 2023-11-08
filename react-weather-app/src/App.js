@@ -301,6 +301,11 @@ function App() {
 
   }
 
+  const changeDateFormat = (myDate) => {
+    parts = myDate.split('-');
+    const formmatedDate = ``
+  }
+
   return (
     <div className="App">
       <header className="d-flex justify-content-center align-items-center"></header>
