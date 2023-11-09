@@ -9,13 +9,22 @@ import {
   MDBTypography,
   MDBInputGroup,
 } from "mdb-react-ui-kit";
-
+// Fontawesome module for icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faCloud, faCloudRain, faSnowflake, faBolt } from '@fortawesome/free-solid-svg-icons';
 
 
 
 export default function Card(props) {
   
-  
+    const weatherIcons = {
+      'Clear': <FontAwesomeIcon icon={faSun} />,
+      'Clouds': <FontAwesomeIcon icon={faCloud} />,
+      'Rain': <FontAwesomeIcon icon={faCloudRain} />,
+      'Snow': <FontAwesomeIcon icon={faSnowflake} />,
+      'Thunderstorm': <FontAwesomeIcon icon={faBolt} />,
+      // Add more conditions as needed
+    };
   
   
     return (
