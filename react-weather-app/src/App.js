@@ -6,7 +6,10 @@ import ForecastList from "./components/ForecastList";
 import WeatherDash from './components/WeatherDash';
 import MDBDashboard from "./components/MDBDashboard";
 import { MDBListGroupItem } from 'mdb-react-ui-kit';
-
+import {
+  MDBInputGroup,
+  MDBBtn,
+} from 'mdb-react-ui-kit';
 
 
 
@@ -289,7 +292,7 @@ function App() {
   //   return formmatedDate
   // }
 
-  const convertDate = (myDate) =>{
+  const convertDateToWeekday = (myDate) =>{
     const parts = myDate.split('-');
     const formmatedDate = `${parts[1]}-${parts[2]}-${parts[0]}`;
 
@@ -301,15 +304,32 @@ function App() {
 
   }
 // function to convert dates from YYYY-MM-DD to MM-DD
-  // const changeDateFormat = (myDate) => {
-  //   parts = myDate.split('-');
-  //   const formmatedDate = ``
-  // }
+  const changeDateFormat = (myDate) => {
+    const parts = myDate.split('-');
+    const formmatedDate = `${parts[1]}-${parts[2]}`;
+    return formmatedDate;
+  }
 
   return (
     <div className="App">
       <header className="d-flex justify-content-center align-items-center"></header>
       <div class="input-group mb-3">
+        <MDBInputGroup className='mb-3'>
+          <input 
+            className='form-control' 
+            placeholder="Recipient's username" 
+            type='text' 
+            id="location-name"
+            onChange={inputHandler}
+            value={getState}
+          />
+          {/* <MDBBtn outline onClick={submitHandler}>Search</MDBBtn> */}
+          <button className="btn btn-primary mt-2" onClick={submitHandler}>
+              Search
+          </button>
+        </MDBInputGroup>
+      </div>
+      {/* <div class="input-group mb-3">
         <input 
           type="text" 
           class="form-control" 
@@ -322,7 +342,7 @@ function App() {
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" onClick={submitHandler} type="button">Button</button>
         </div>
-      </div>
+      </div> */}
       <MDBDashboard 
         forecastData = {forecastData}
         inputHandler = {inputHandler}
@@ -333,7 +353,8 @@ function App() {
         items = {items}
         itemSubmitHandler = {itemSubmitHandler}
         daysForecast = {daysForecast}
-        convertDate = {convertDate}
+        convertDateToWeekday = {convertDateToWeekday}
+        changeDateFormat = {changeDateFormat}
       />
       {/* <WeatherDash 
         forecastData = {forecastData}
@@ -352,7 +373,7 @@ function App() {
       </div> 
       <footer className="footer">
         <code>
-          Created by this{' '}
+          Created by{' '}
           <a href="https://github.com/kaluawa22" target="none">
             Kalu
           </a>{' '}

@@ -17,11 +17,11 @@ import WeatherIcon from "./WeatherIcon";
 export default function Card(props) {
 
     return (
-    <section className="vh-100" style={{ backgroundColor: "#C1CFEA" }}>
+    <section className="vh-100" style={{ }}>
         
         {props.forecastData.list ? (
             <MDBContainer className="h-70">
-            <MDBInputGroup className="mb-3">
+            {/* <MDBInputGroup className="mb-3">
                 <input
                 type="text"
                 id="location-name"
@@ -35,7 +35,7 @@ export default function Card(props) {
                 <button className="btn btn-primary mt-2" onClick={props.submitHandler}>
                     Search
                 </button>
-            </MDBInputGroup>
+            </MDBInputGroup> */}
     
             <MDBRow
               className="justify-content-center align-items-center h-100"
@@ -78,12 +78,12 @@ export default function Card(props) {
                         <div className="d-flex justify-content-around text-center pb-3 pt-2">
                           <div className="flex-column">
                             <p className="small">
-                              <strong>{props.kelvinToF(props.daysForecast[item][2].main.temp)} F</strong>
+                              <strong>{props.kelvinToF(props.daysForecast[item][0].main.temp)} F</strong>
                             </p>
-                            <WeatherIcon weatherCondition={props.daysForecast[item][2].weather[0].main } size={"2x"} />
+                            <WeatherIcon weatherCondition={props.daysForecast[item][0].weather[0].main } size={"2x"} />
                             <p className="mb-0">
-                              <strong>{item}</strong><br/>
-                              <strong>{props.convertDate(item)}</strong>
+                              <strong>{props.changeDateFormat(item)}</strong><br/>
+                              <strong>{props.convertDateToWeekday(item)}</strong>
                             </p>
                           </div>
                         </div>
@@ -106,7 +106,7 @@ export default function Card(props) {
         ) : (
 
             <MDBContainer className="h-50">
-              <MDBInputGroup className="mb-3">
+              {/* <MDBInputGroup className="mb-3">
                   <input
                       type="text"
                       id="location-name"
@@ -120,7 +120,7 @@ export default function Card(props) {
                   <button className="btn btn-primary mt-2" onClick={props.submitHandler}>
                       Search
                   </button>
-              </MDBInputGroup>
+              </MDBInputGroup> */}
 
               <MDBRow
                 className="justify-content-center align-items-center h-100"
