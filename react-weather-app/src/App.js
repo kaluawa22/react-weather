@@ -301,10 +301,10 @@ function App() {
 
   }
 // function to convert dates from YYYY-MM-DD to MM-DD
-  const changeDateFormat = (myDate) => {
-    parts = myDate.split('-');
-    const formmatedDate = ``
-  }
+  // const changeDateFormat = (myDate) => {
+  //   parts = myDate.split('-');
+  //   const formmatedDate = ``
+  // }
 
   return (
     <div className="App">

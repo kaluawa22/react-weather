@@ -10,28 +10,14 @@ import {
   MDBInputGroup,
 } from "mdb-react-ui-kit";
 // Fontawesome module for icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faCloud, faCloudRain, faSnowflake, faBolt } from '@fortawesome/free-solid-svg-icons';
 
+import WeatherIcon from "./WeatherIcon";
 
 
 export default function Card(props) {
-  
-    const weatherIcons = {
-      'Clear': <FontAwesomeIcon icon={faSun} />,
-      'Clouds': <FontAwesomeIcon icon={faCloud} />,
-      'Rain': <FontAwesomeIcon icon={faCloudRain} />,
-      'Snow': <FontAwesomeIcon icon={faSnowflake} />,
-      'Thunderstorm': <FontAwesomeIcon icon={faBolt} />,
-      // Add more conditions as needed
-    };
-  
-  
+
     return (
     <section className="vh-100" style={{ backgroundColor: "#C1CFEA" }}>
-
-        
-        
         
         {props.forecastData.list ? (
             <MDBContainer className="h-70">
@@ -71,10 +57,14 @@ export default function Card(props) {
                         <small>{props.currentDateTime.toLocaleString()}</small>
                       </div>
                       <div>
-                        <img
+                        <WeatherIcon 
+                          weatherCondition={props.forecastData.list[0].weather[0].main}
+                          size ={"7x"} 
+                        />
+                        {/* <img
                           src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp"
                           width="150px"
-                        />
+                        /> */}
                       </div>
                     </div>
                   </MDBCardBody>
@@ -88,16 +78,9 @@ export default function Card(props) {
                         <div className="d-flex justify-content-around text-center pb-3 pt-2">
                           <div className="flex-column">
                             <p className="small">
-                              <strong>{props.kelvinToF(props.daysForecast[item][0].main.temp)} F</strong>
+                              <strong>{props.kelvinToF(props.daysForecast[item][2].main.temp)} F</strong>
                             </p>
-                            <MDBIcon
-                              fas
-                              // icon={props.daysForecast[item][0].weather[0].icon}
-                              icon="sun"
-                              size="2x"
-                              className="mb-3"
-                              style={{ color: "#ddd" }}
-                            />
+                            <WeatherIcon weatherCondition={props.daysForecast[item][2].weather[0].main } size={"2x"} />
                             <p className="mb-0">
                               <strong>{item}</strong><br/>
                               <strong>{props.convertDate(item)}</strong>
