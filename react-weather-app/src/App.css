@@ -268,3 +268,9 @@ input:focus {
       padding-left: 26px;
   }
 }
+
+/* Search Button Styling */
+
+.btn-search{
+  box-shadow: none !important;
+}

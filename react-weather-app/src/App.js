@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import ForecastList from "./components/ForecastList";
 import WeatherDash from './components/WeatherDash';
 import MDBDashboard from "./components/MDBDashboard";
+import SearchBar from './components/SearchBar';
 import { MDBListGroupItem } from 'mdb-react-ui-kit';
 import {
   MDBInputGroup,
@@ -313,7 +314,12 @@ function App() {
   return (
     <div className="App">
       <header className="d-flex justify-content-center align-items-center"></header>
-      <div class="input-group mb-3">
+      {/* <SearchBar
+        inputHandler = {inputHandler}
+        submitHandler = {submitHandler}
+        getState = {getState}
+      /> */}
+      {/* <div class="input-group mb-3">
         <MDBInputGroup className='mb-3'>
           <input 
             className='form-control' 
@@ -323,12 +329,12 @@ function App() {
             onChange={inputHandler}
             value={getState}
           />
-          {/* <MDBBtn outline onClick={submitHandler}>Search</MDBBtn> */}
+     
           <button className="btn btn-primary mt-2" onClick={submitHandler}>
               Search
           </button>
         </MDBInputGroup>
-      </div>
+      </div> */}
       {/* <div class="input-group mb-3">
         <input 
           type="text" 
