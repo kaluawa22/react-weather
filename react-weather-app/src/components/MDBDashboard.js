@@ -67,7 +67,7 @@ export default function Card(props) {
                           <div className="d-flex justify-content-around text-center pb-3 pt-2">
                             <div className="flex-column">
                               <p className="small">
-                                <strong>{props.kelvinToF(props.daysForecast[item][0].main.temp)} F</strong>
+                                <strong>{props.kelvinToF(props.daysForecast[item][0].main.temp)}° F</strong>
                               </p>
                               <WeatherIcon weatherCondition={props.daysForecast[item][0].weather[0].main } size={"2x"} />
                               <p className="mb-0">

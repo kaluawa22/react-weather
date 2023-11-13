@@ -273,4 +273,9 @@ input:focus {
 
 .btn-search{
   box-shadow: none !important;
+  background: black!important;
+  color: white!important;
+  border-color: black!important;
+  border-width: 2px!important;
+  border-radius: .25rem;
 }

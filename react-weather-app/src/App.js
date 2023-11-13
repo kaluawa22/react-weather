@@ -109,38 +109,53 @@ function App() {
 
   // }, [state]);
 
-
-
-  useEffect( () => {
-
-    const fetchForecastData = () =>{
-      try{
+  useEffect(() => {
+    const fetchForecastData = () => {
+      try {
         fetch(forecastApi)
-        .then(res => res.json())
-        .then(data => {
-          const groupedData = data.list.reduce((days, row) => {
-            const date = row.dt_txt.split(' ')[0];
-            days[date] = [...(days[date] ? days[date]: []), row];
-            return days;
-          }, {});
-          setDaysForecast(groupedData);
-          console.log('Grouped Data:', groupedData);
-          for(let date of Object.keys(groupedData)){
-            console.log('Date:', date); 
-            // current date -> date
-            // original items array for this date -> groupedData[date]
-            console.log('RowCount:', groupedData[date].length);
-            console.log('MaxTemp:', getMax(groupedData[date], 'temp_max'));
-            console.log('MinTemp:', getMin(groupedData[date], 'temp_min'));
-            console.log('MaxHumidity:', getMax(groupedData[date], 'humidity'));
-            
-            console.log('\n\n');
-          }
-        });
-      } catch(error){
-        console.error('Error fetching Forecasat', error);
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error(`Forecast API error: ${res.status} - ${res.statusText}`);
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (data.cod === "404") {
+              // Handle 404 error response
+              console.error('City not found:', data.message);
+              // You might want to set some state here to indicate the error to the user
+            } else {
+              const groupedData = data.list.reduce((days, row) => {
+                const date = row.dt_txt.split(' ')[0];
+                days[date] = [...(days[date] ? days[date] : []), row];
+                return days;
+              }, {});
+              setDaysForecast(groupedData);
+              console.log('Grouped Data:', groupedData);
+              for (let date of Object.keys(groupedData)) {
+                console.log('Date:', date);
+                // current date -> date
+                // original items array for this date -> groupedData[date]
+                console.log('RowCount:', groupedData[date].length);
+                console.log('MaxTemp:', getMax(groupedData[date], 'temp_max'));
+                console.log('MinTemp:', getMin(groupedData[date], 'temp_min'));
+                console.log('MaxHumidity:', getMax(groupedData[date], 'humidity'));
+  
+                console.log('\n\n');
+              }
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching Forecast', error);
+            // Handle other errors here
+            // You might want to set some state to indicate the error to the user
+          });
+      } catch (error) {
+        console.error('Error fetching Forecast', error);
+        // Handle other errors here
+        // You might want to set some state to indicate the error to the user
       }
-    }
+    };
     function getMax(arr, attr){
       return Math.max.apply(Math, arr.map(item => item.main[attr]));
     }
@@ -148,11 +163,54 @@ function App() {
     function getMin(arr, attr){
       return Math.min.apply(Math, arr.map(item => item.main[attr]));
     }
-    if (state){
+    if (state) {
       fetchForecastData();
     }
-
   }, [state]);
+  
+
+  // useEffect( () => {
+
+  //   const fetchForecastData = () =>{
+  //     try{
+  //       fetch(forecastApi)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         const groupedData = data.list.reduce((days, row) => {
+  //           const date = row.dt_txt.split(' ')[0];
+  //           days[date] = [...(days[date] ? days[date]: []), row];
+  //           return days;
+  //         }, {});
+  //         setDaysForecast(groupedData);
+  //         console.log('Grouped Data:', groupedData);
+  //         // for(let date of Object.keys(groupedData)){
+  //         //   console.log('Date:', date); 
+  //         //   // current date -> date
+  //         //   // original items array for this date -> groupedData[date]
+  //         //   // console.log('RowCount:', groupedData[date].length);
+  //         //   // console.log('MaxTemp:', getMax(groupedData[date], 'temp_max'));
+  //         //   // console.log('MinTemp:', getMin(groupedData[date], 'temp_min'));
+  //         //   // console.log('MaxHumidity:', getMax(groupedData[date], 'humidity'));
+            
+  //         //   // console.log('\n\n');
+  //         // }
+  //       });
+  //     } catch(error){
+  //       console.error('Error fetching Forecasat', error);
+  //     }
+  //   }
+  //   function getMax(arr, attr){
+  //     return Math.max.apply(Math, arr.map(item => item.main[attr]));
+  //   }
+
+  //   function getMin(arr, attr){
+  //     return Math.min.apply(Math, arr.map(item => item.main[attr]));
+  //   }
+  //   if (state){
+  //     fetchForecastData();
+  //   }
+
+  // }, [state]);
 
 
 
@@ -313,7 +371,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="d-flex justify-content-center align-items-center"></header>
+      <header className="d-flex justify-content-center align-items-center">Kalu Weather</header>
       {/* <SearchBar
         inputHandler = {inputHandler}
         submitHandler = {submitHandler}
