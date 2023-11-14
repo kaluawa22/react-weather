@@ -328,6 +328,10 @@ function App() {
   //     // .then((data) => console.log(JSON.stringify(data)));
   //   console.log(locationData);
   };
+  const resetErrorStatus = () => {
+    // Reset errorStatus to false
+    setErrorStatus(false);
+  };
 
 // To convert Kelvin to F
   const kelvinToF = (k) =>{
@@ -426,6 +430,7 @@ function App() {
         convertDateToWeekday = {convertDateToWeekday}
         changeDateFormat = {changeDateFormat}
         errorStatus = {errorStatus}
+        resetErrorStatus={resetErrorStatus}
       />
       {/* <WeatherDash 
         forecastData = {forecastData}

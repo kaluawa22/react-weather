@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 import {
   MDBCard,
   MDBCardBody,
@@ -16,8 +17,13 @@ import WeatherIcon from "./WeatherIcon";
 import SearchBar from "./SearchBar";
 
 export default function Card(props) {
+  const [showAlert, setShowAlert] = useState(false);
+  const handleShowAlert = () => {
+    setShowAlert(true);
 
-
+    // Reset errorStatus after showing the alert
+    props.resetErrorStatus();
+  };
 
 
     return (
@@ -123,10 +129,13 @@ export default function Card(props) {
                 <MDBCol md="9" lg="7" xl="5">
                   <SearchBar
                     inputHandler = {props.inputHandler}
-                    submitHandler = {props.submitHandler}
+                    submitHandler={() => {
+                      props.submitHandler();
+                      handleShowAlert();
+                    }}
                     getState = {props.getState}
                   />
-                  {props.errorStatus && <ErrorAlert />}
+                  {showAlert && <ErrorAlert/>}
                   <MDBCard
                     className="mb-4 gradient-custom"
                     style={{ borderRadius: "25px" }}

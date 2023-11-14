@@ -7,7 +7,7 @@ function ErrorAlert() {
 
   if (show) {
     return (
-      <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+      <Alert variant="danger" >
         <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
         <p>
           Please enter a valid city name
