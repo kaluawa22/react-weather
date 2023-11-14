@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
-import Dashboard from "./components/Dashboard";
-import ForecastList from "./components/ForecastList";
-import WeatherDash from './components/WeatherDash';
+// import Dashboard from "./components/Dashboard";
+// import ForecastList from "./components/ForecastList";
+// import WeatherDash from './components/WeatherDash';
 import MDBDashboard from "./components/MDBDashboard";
-import SearchBar from './components/SearchBar';
+// import SearchBar from './components/SearchBar';
+import ErrorAlert from './components/ErrorAlert';
 import { MDBListGroupItem } from 'mdb-react-ui-kit';
 import {
   MDBInputGroup,
@@ -27,7 +28,7 @@ function App() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [items, setItems] = useState([]);
   const [daysForecast, setDaysForecast] = useState({});
-
+  const [errorStatus, setErrorStatus] = useState(false);
 
 
   // API KEY and URL where state holds location name
@@ -123,6 +124,8 @@ function App() {
             if (data.cod === "404") {
               // Handle 404 error response
               console.error('City not found:', data.message);
+              setErrorStatus(true);
+             
               // You might want to set some state here to indicate the error to the user
             } else {
               const groupedData = data.list.reduce((days, row) => {
@@ -301,6 +304,7 @@ function App() {
 
   const inputHandler = (event) => {
     setGetState(event.target.value);
+    
    };
   
   const itemSubmitHandler = () =>{
@@ -311,6 +315,7 @@ function App() {
     setState(getState);
     addItem();
     console.log(forecastApi);
+    // setErrorStatus(true);
     // fetch(geoApiUrl)
     //   .then((res) => res.json())
     //   .then((data) => setLocationData(data[0]));
@@ -407,6 +412,7 @@ function App() {
           <button class="btn btn-outline-secondary" onClick={submitHandler} type="button">Button</button>
         </div>
       </div> */}
+      {/* {errorStatus && <ErrorAlert />} */}
       <MDBDashboard 
         forecastData = {forecastData}
         inputHandler = {inputHandler}
@@ -419,6 +425,7 @@ function App() {
         daysForecast = {daysForecast}
         convertDateToWeekday = {convertDateToWeekday}
         changeDateFormat = {changeDateFormat}
+        errorStatus = {errorStatus}
       />
       {/* <WeatherDash 
         forecastData = {forecastData}

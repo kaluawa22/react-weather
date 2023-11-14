@@ -2,13 +2,13 @@ import React from 'react'
 import {
     MDBInputGroup,
   } from 'mdb-react-ui-kit';
-  
+import ErrorAlert from './ErrorAlert';
 
 
 export default function SearchBar(props) { 
 
     return (
-        <div className="input-group mb-3 justify-content-center" style={{paddingTop:"100px"}}>
+      <div className="input-group mb-3 justify-content-center" style={{paddingTop:"100px"}}>
         <MDBInputGroup className='mb-3' >
           <input 
             className='form-control' 
@@ -24,6 +24,7 @@ export default function SearchBar(props) {
               Search
           </button>
         </MDBInputGroup>
+        {/* {props.errorStatus && <ErrorAlert />} */}
       </div>
 
     );

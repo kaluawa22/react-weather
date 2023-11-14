@@ -9,12 +9,16 @@ import {
   MDBTypography,
   MDBInputGroup,
 } from "mdb-react-ui-kit";
+import ErrorAlert from './ErrorAlert';
 // Fontawesome module for icons
 
 import WeatherIcon from "./WeatherIcon";
 import SearchBar from "./SearchBar";
 
 export default function Card(props) {
+
+
+
 
     return (
     <section className="vh-100" style={{ }}>
@@ -30,6 +34,7 @@ export default function Card(props) {
                     inputHandler = {props.inputHandler}
                     submitHandler = {props.submitHandler}
                     getState = {props.getState}
+                    errorStatus = {props.errorStatus}
                   />
                   <MDBCard
                     className="mb-4 gradient-custom"
@@ -121,6 +126,7 @@ export default function Card(props) {
                     submitHandler = {props.submitHandler}
                     getState = {props.getState}
                   />
+                  {props.errorStatus && <ErrorAlert />}
                   <MDBCard
                     className="mb-4 gradient-custom"
                     style={{ borderRadius: "25px" }}
