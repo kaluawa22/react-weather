@@ -136,7 +136,7 @@ export default function Card(props) {
                     getState = {props.getState}
                   />
                   {showAlert && <ErrorAlert/>}
-                  <MDBCard
+                  {/* <MDBCard
                     className="mb-4 gradient-custom"
                     style={{ borderRadius: "25px" }}
                   >
@@ -149,14 +149,14 @@ export default function Card(props) {
                           <p className="text-muted mb-0">Enter A City Name</p>
                         </div>
                         <div>
-                          {/* <img
+                          <img
                             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp"
                             width="150px"
-                          /> */}
+                          />
                         </div>
                       </div>
                     </MDBCardBody>
-                  </MDBCard>
+                  </MDBCard> */}
 
 
                   {/* <MDBCard className="mb-4" style={{ borderRadius: "25px" }}>

@@ -109,7 +109,7 @@ function App() {
   //   }
 
   // }, [state]);
-
+  
   useEffect(() => {
     const fetchForecastData = () => {
       try {
@@ -125,6 +125,7 @@ function App() {
               // Handle 404 error response
               console.error('City not found:', data.message);
               setErrorStatus(true);
+              console.log('Error Status:', errorStatus);
              
               // You might want to set some state here to indicate the error to the user
             } else {
@@ -153,6 +154,7 @@ function App() {
             // Handle other errors here
             // You might want to set some state to indicate the error to the user
           });
+          
       } catch (error) {
         console.error('Error fetching Forecast', error);
         // Handle other errors here
