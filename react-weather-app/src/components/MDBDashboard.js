@@ -17,31 +17,31 @@ import WeatherIcon from "./WeatherIcon";
 import SearchBar from "./SearchBar";
 
 export default function Card(props) {
-  const [showAlert, setShowAlert] = useState(false);
-  const handleShowAlert = () => {
-    setShowAlert(true);
+  // const [showAlert, setShowAlert] = useState(false);
+  // const handleShowAlert = () => {
+  //   setShowAlert(true);
 
-    // Reset errorStatus after showing the alert
-    props.resetErrorStatus();
-  };
+  //   // Reset errorStatus after showing the alert
+  //   props.resetErrorStatus();
+  // };
 
 
     return (
     <section className="vh-100" style={{ }}>
         
-        {props.forecastData.list ? (
+        {props.forecastData.list && props.locationData ? (
             <MDBContainer className="h-70">
               <MDBRow
                 className="justify-content-center align-items-center h-100"
                 style={{ color: "#282828" }}
               >
                 <MDBCol md="9" lg="7" xl="5">
-                  <SearchBar
+                  {/* <SearchBar
                     inputHandler = {props.inputHandler}
                     submitHandler = {props.submitHandler}
                     getState = {props.getState}
                     errorStatus = {props.errorStatus}
-                  />
+                  /> */}
                   <MDBCard
                     className="mb-4 gradient-custom"
                     style={{ borderRadius: "25px" }}
@@ -54,6 +54,7 @@ export default function Card(props) {
                             {/* <strong>{props.daysForecast["2023-11-07"][0].main.humidity}</strong> */}
                           </h2>
                           <p className="text-muted mb-0">{props.forecastData.city.name}</p>
+                          <p className="text-muted mb-0">{props.locationData[0].state + ', ' + props.locationData[0].country}</p>
                           <small>{props.currentDateTime.toLocaleString()}</small>
                         </div>
                         <div>
@@ -127,7 +128,7 @@ export default function Card(props) {
                 style={{ color: "#282828" }}
               >
                 <MDBCol md="9" lg="7" xl="5">
-                  <SearchBar
+                  {/* <SearchBar
                     inputHandler = {props.inputHandler}
                     submitHandler={() => {
                       props.submitHandler();
@@ -135,7 +136,7 @@ export default function Card(props) {
                     }}
                     getState = {props.getState}
                   />
-                  {showAlert && <ErrorAlert/>}
+                  {showAlert && <ErrorAlert/>} */}
                   {/* <MDBCard
                     className="mb-4 gradient-custom"
                     style={{ borderRadius: "25px" }}

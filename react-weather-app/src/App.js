@@ -12,6 +12,7 @@ import {
   MDBInputGroup,
   MDBBtn,
 } from 'mdb-react-ui-kit';
+import SearchBar from './components/SearchBar';
 
 
 
@@ -21,7 +22,7 @@ function App() {
   const [apiData, setApiData] = useState({});
   const [getState, setGetState] = useState('');
   const [state, setState] = useState('');
-  // const [locationData, setLocationData] = useState({});
+  const [locationData, setLocationData] = useState({});
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [forecastData, setForecastData] = useState({});
@@ -38,7 +39,9 @@ function App() {
   const geoApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${state}&limit=1&appid=${apiKey}`;
   // const forecastApi = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
   const forecastApi = `https://api.openweathermap.org/data/2.5/forecast?q=${state}&appid=${apiKey}`;
-  
+ 
+ 
+  // https://api.openweathermap.org/geo/1.0/direct?q=houston&appid=f1ea44311307a2d37ecf91f277cce87a
   // https://api.openweathermap.org/data/2.5/weather?q=houston&appid=f1ea44311307a2d37ecf91f277cce87a
   // https://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=f1ea44311307a2d37ecf91f277cce87a
   
@@ -116,25 +119,23 @@ function App() {
         fetch(forecastApi)
           .then((res) => {
             if (!res.ok) {
+              setErrorStatus(true);
+              
               throw new Error(`Forecast API error: ${res.status} - ${res.statusText}`);
+              
             }
+            console.log('Error Status:', errorStatus);
             return res.json();
           })
           .then((data) => {
-            if (data.cod === "404") {
-              // Handle 404 error response
-              console.error('City not found:', data.message);
-              setErrorStatus(true);
-              console.log('Error Status:', errorStatus);
-             
-              // You might want to set some state here to indicate the error to the user
-            } else {
+        
               const groupedData = data.list.reduce((days, row) => {
                 const date = row.dt_txt.split(' ')[0];
                 days[date] = [...(days[date] ? days[date] : []), row];
                 return days;
               }, {});
               setDaysForecast(groupedData);
+              setErrorStatus(false);
               console.log('Grouped Data:', groupedData);
               for (let date of Object.keys(groupedData)) {
                 console.log('Date:', date);
@@ -147,7 +148,7 @@ function App() {
   
                 console.log('\n\n');
               }
-            }
+           
           })
           .catch((error) => {
             console.error('Error fetching Forecast', error);
@@ -161,6 +162,35 @@ function App() {
         // You might want to set some state to indicate the error to the user
       }
     };
+
+    const fetchLocationData = () => {
+      try {
+        fetch(geoApiUrl)
+        .then((res) => {
+          if (!res.ok){
+            // setErrorStatus(true);
+            throw new Error(`Location API error: ${res.status} - ${res.statusText}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // Process location data and set state
+          setLocationData(data);
+         
+        })
+        .catch((error) => {
+          console.error('Error fetching Location', error);
+          // setErrorStatus(true);
+        });
+      } catch (error) {
+        console.error('Error fetching Location', error);
+        // setErrorStatus(true);
+      }
+    };
+
+
+
+
     function getMax(arr, attr){
       return Math.max.apply(Math, arr.map(item => item.main[attr]));
     }
@@ -170,6 +200,7 @@ function App() {
     }
     if (state) {
       fetchForecastData();
+      fetchLocationData();
     }
   }, [state]);
   
@@ -419,6 +450,12 @@ function App() {
         </div>
       </div> */}
       {/* {errorStatus && <ErrorAlert />} */}
+      <SearchBar 
+        inputHandler = {inputHandler}
+        submitHandler={submitHandler}
+        getState = {getState}
+        errorStatus = {errorStatus}
+      />
       <MDBDashboard 
         forecastData = {forecastData}
         inputHandler = {inputHandler}
@@ -433,6 +470,7 @@ function App() {
         changeDateFormat = {changeDateFormat}
         errorStatus = {errorStatus}
         resetErrorStatus={resetErrorStatus}
+        locationData = {locationData}
       />
       {/* <WeatherDash 
         forecastData = {forecastData}
