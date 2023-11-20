@@ -1,30 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
-// import Dashboard from "./components/Dashboard";
-// import ForecastList from "./components/ForecastList";
-// import WeatherDash from './components/WeatherDash';
 import MDBDashboard from "./components/MDBDashboard";
-// import SearchBar from './components/SearchBar';
-import ErrorAlert from './components/ErrorAlert';
 import { MDBListGroupItem } from 'mdb-react-ui-kit';
+import SearchBar from './components/SearchBar';
 import {
   MDBInputGroup,
   MDBBtn,
 } from 'mdb-react-ui-kit';
-import SearchBar from './components/SearchBar';
+
 
 
 
 function App() {
   // State
 
-  const [apiData, setApiData] = useState({});
+  // const [apiData, setApiData] = useState({});
   const [getState, setGetState] = useState('');
   const [state, setState] = useState('');
   const [locationData, setLocationData] = useState({});
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+  // const [latitude, setLatitude] = useState('');
+  // const [longitude, setLongitude] = useState('');
   const [forecastData, setForecastData] = useState({});
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [items, setItems] = useState([]);
@@ -46,19 +42,6 @@ function App() {
   // https://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=f1ea44311307a2d37ecf91f277cce87a
   
 
-  // function to get location
-
-  // const handleLocation = () =>{
-  //   fetch(geoApiUrl)
-  //     .then((res) => res.json())
-  //     .then((data) => setLocationData(data));
-  // }
-
-// useEffect( () =>{
-//   const getDate = setInterval(() => {
-//     setCurrentDateTime(new Date());
-//   });
-// }, []);
 
   useEffect( () => {
     const date = new Date();
