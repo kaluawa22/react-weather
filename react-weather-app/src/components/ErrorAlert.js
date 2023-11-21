@@ -8,7 +8,7 @@ function ErrorAlert() {
   if (show) {
     return (
       <Alert variant="danger" >
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        <Alert.Heading>ERROR!</Alert.Heading>
         <p>
           Please enter a valid city name
         </p>
