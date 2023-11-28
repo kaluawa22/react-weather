@@ -44,8 +44,11 @@ function App() {
   // https://api.openweathermap.org/data/2.5/weather?q=houston&appid=f1ea44311307a2d37ecf91f277cce87a
   // https://api.openweathermap.org/geo/1.0/direct?q=houston&limit=1&appid=f1ea44311307a2d37ecf91f277cce87a
   
-
-
+  // https://api.openweathermap.org/data/2.5/find?q=houston&type=like&sort=population&cnt=10&appid=f1ea44311307a2d37ecf91f277cce87a`
+  // 5357527 Hollywood city ID
+  
+  
+  
   useEffect( () => {
     const date = new Date();
     const options ={
